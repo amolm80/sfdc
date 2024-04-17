@@ -1,0 +1,26 @@
+<template>
+    <lightning-card title="Demo LWC" >
+        <div class="slds-p-around_small">
+        <p>Hello {inputname}</p>
+        <template if:true={obj}>
+            <p>Hello {obj.firstName} {obj.lastName}</p>
+            <p>Date {dateval}</p>
+        </template>
+        <lightning-input type="date" name="sdate" value="12-12-22" onchange={dateChange} ></lightning-input>
+        <lightning-input  value={inputname} onchange={updatename}></lightning-input>
+        <lightning-button label="Get Cases" value="getCases" onclick={btnClick} ></lightning-button>
+    </div>
+</lightning-card>
+
+
+
+<template if:true={cases}>
+    <lightning-card title="Cases" >
+        <div  class="slds-p-around_small">
+            <template for:each={cases} for:item="c">
+                <p key={c.Id}>{c.Id} &nbsp;&nbsp;&nbsp; {c.Subject}</p>
+            </template>
+        </div>
+    </lightning-card>
+</template>
+</template>

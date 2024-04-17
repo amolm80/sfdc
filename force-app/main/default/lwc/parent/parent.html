@@ -1,0 +1,16 @@
+<template>
+
+    <lightning-card title="Parent"  >
+
+        <div class="slds-p-around_small" >
+          Parent Value :  {parentVal}  <br/>
+          <lightning-button label="Reset" onclick={resetChildValue} ></lightning-button>
+        </div>
+
+        <div class="slds-box slds-box_small" >
+          <c-child onchildevent={handleChildEvent}></c-child>
+        </div>
+      
+    </lightning-card>
+
+</template>
