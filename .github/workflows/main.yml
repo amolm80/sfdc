@@ -31,3 +31,9 @@ jobs:
 
       - name: Display Authenticated Org
         run: sfdx force:org:list
+
+      - name: Authenticated devOrg
+        run: sf org login jwt --client-id ${{ secrets.SALESFORCE_CLIENT_ID }} --jwt-key-file ${{ secrets.SALESFORCE_SERVER_KEY }} --username ${{ secrets.SALESFORCE_USERNAME }} --instance-url https://amolm-dev-ed.my.salesforce.com -a devorg
+      
+      - name: Display Authenticated Org
+        run: sfdx force:org:list        
