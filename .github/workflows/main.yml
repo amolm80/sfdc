@@ -28,3 +28,6 @@ jobs:
 
       - name: SFDX version
         run: sfdx -v
+
+      - name: Display Authenticated Org
+        run: sfdx force:org:list
