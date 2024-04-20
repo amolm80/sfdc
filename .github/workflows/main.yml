@@ -27,4 +27,4 @@ jobs:
         run: npm install @salesforce/cli --global
 
       - name: SFDX version
-      run: sfdx -v
+        run: sfdx -v
