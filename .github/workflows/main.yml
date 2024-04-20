@@ -33,7 +33,7 @@ jobs:
         run: sfdx force:org:list
 
       - name: Access Repository Secret and create server.key
-        run:  echo "$SERVER_KEY" | base64 --decode > server.key
+        run:  echo $SERVER_KEY | base64 --decode > server.key
         #run:  echo "${{ secrets.SALESFORCE_SERVER_KEY }}" | base64 --decode > server.key
 
       - name: cat server.key
