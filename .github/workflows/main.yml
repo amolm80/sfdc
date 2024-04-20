@@ -7,7 +7,7 @@ on:
 
 jobs:
   checkout_and_install:
-    runs-on: ubuntu-latest
+    1runs-on: ubuntu-latest
 
     steps:
       - name: Checkout pull request code
