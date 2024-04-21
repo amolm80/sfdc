@@ -15,7 +15,7 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.ref }}
 
-        - name: Setup Node.js environment
+      - name: Setup Node.js environment
         run: |
               # Get the pull request branch name
               branch_name=$(echo "${{ github.head_ref }}" | tr '[:upper:]' '[:lower:]')
