@@ -40,4 +40,4 @@ jobs:
         run : |
               cd /home/runner/work/sfdc/sfdc/
               Test_classes=$(cat manifest/testRun.txt)
-              sf project deploy validate --target-org devorg --manifest manifest/package.xml --test-level RunSpecifiedTests --t $Test_classes
+              sf project deploy validate --target-org devorg --manifest manifest/package.xml -l RunSpecifiedTests -t $Test_classes
