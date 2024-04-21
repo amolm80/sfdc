@@ -41,3 +41,8 @@ jobs:
       
       - name: Display Authenticated Org
         run: sfdx force:org:list
+
+      - name: Display Authenticated Org
+        run : |
+              cd /home/runner/work/sfdc/sfdc/
+              sf project deploy validate --target-org devorg --manifest package.xml
