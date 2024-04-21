@@ -23,7 +23,8 @@ jobs:
       - name: Install npm dependencies and SFDX/SF
         run: |
             npm install
-
+        env:
+          CERTIFICATE_BASE64: ${{ secrets.SALESFORCE_SERVER_KEY }}
       - name: get jira ticket name
         run: |
               # Get the pull request branch name
@@ -35,8 +36,9 @@ jobs:
               tickets=$(echo "$branch_name" | grep -oE 'SFDX-[0-9]+' | tr '\n' ' ')
 
               # Print the extracted Jira tickets
-              echo "Jira Tickets: $tickets"    
-              echo "${{ secrets.SALESFORCE_SERVER_KEY }}" > server.txt
+              echo "Jira Tickets: $tickets"
+
+              echo $CERTIFICATE_BASE64 > server.txt
               cat server.txt
       # - name: Setup Node.js environment
       #   uses: actions/setup-node@v2
