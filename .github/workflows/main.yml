@@ -53,10 +53,10 @@ jobs:
       - name: Install SFD
         run: npm install @salesforce/cli --global
 
-      - name: Access Repository Secret and create server.key
-        run:  |
-               echo ${{ secrets.SALESFORCE_SERVER_KEY }} | base64 --decode > server.key
-               cat server.key
+      #- name: Access Repository Secret and create server.key
+      #  run:  |
+       #        echo ${{ secrets.SALESFORCE_SERVER_KEY }} | base64 --decode > server.key
+       #        cat server.key
          #run:  echo "${{ secrets.SALESFORCE_SERVER_KEY }}" | base64 --decode > server.key
 
       - name: Authenticated devOrg
