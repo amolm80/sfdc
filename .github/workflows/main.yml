@@ -40,12 +40,12 @@ jobs:
 
               echo $CERTIFICATE_BASE64 > server.txt
               cat server.txt
-       - name: Setup Node.js environment
-         uses: actions/setup-node@v2
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v2
          with:
            node-version: '20.12.2' # or specify the version you need
 
-       - name: Install npm dependencies and SFDX/SF
+      - name: Install npm dependencies and SFDX/SF
          run: |
              npm install
              npm install @salesforce/cli --global
@@ -66,4 +66,4 @@ jobs:
          run : |
                cd /home/runner/work/sfdc/sfdc/
                Test_classes=$(cat manifest/testRun.txt)
-      #         sf project deploy validate --target-org devorg --manifest manifest/package.xml -l RunSpecifiedTests -t $Test_classes
+               sf project deploy validate --target-org devorg --manifest manifest/package.xml -l RunSpecifiedTests -t $Test_classes
