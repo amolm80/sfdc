@@ -42,28 +42,28 @@ jobs:
               cat server.txt
       - name: Setup Node.js environment
         uses: actions/setup-node@v2
-         with:
+        with:
            node-version: '20.12.2' # or specify the version you need
 
       - name: Install npm dependencies and SFDX/SF
-         run: |
+        run: |
              npm install
              npm install @salesforce/cli --global
 
       - name: Install SFD
         run: npm install @salesforce/cli --global
 
-       - name: Access Repository Secret and create server.key
-         run:  |
+      - name: Access Repository Secret and create server.key
+        run:  |
                echo ${{ secrets.SALESFORCE_SERVER_KEY }} | base64 --decode > server.key
                cat server.key
          #run:  echo "${{ secrets.SALESFORCE_SERVER_KEY }}" | base64 --decode > server.key
 
-       - name: Authenticated devOrg
-         run: sf org login jwt --client-id ${{ secrets.SALESFORCE_CLIENT_ID }} --jwt-key-file /home/runner/work/sfdc/sfdc/key/devorg/server.key  --username ${{ secrets.SALESFORCE_USERNAME }} --instance-url https://amolm-dev-ed.my.salesforce.com -a devorg
+      - name: Authenticated devOrg
+        run: sf org login jwt --client-id ${{ secrets.SALESFORCE_CLIENT_ID }} --jwt-key-file /home/runner/work/sfdc/sfdc/key/devorg/server.key  --username ${{ secrets.SALESFORCE_USERNAME }} --instance-url https://amolm-dev-ed.my.salesforce.com -a devorg
 
-       - name: Validate package
-         run : |
+      - name: Validate package
+        run : |
                cd /home/runner/work/sfdc/sfdc/
                Test_classes=$(cat manifest/testRun.txt)
                sf project deploy validate --target-org devorg --manifest manifest/package.xml -l RunSpecifiedTests -t $Test_classes
