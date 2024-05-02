@@ -1,4 +1,4 @@
-name: Checkout Pull Request Code and Install npm
+name: Validte and deploy Testing Branch
 
 on:
   push:
