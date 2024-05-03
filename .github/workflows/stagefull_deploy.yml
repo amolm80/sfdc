@@ -1,4 +1,4 @@
-name: Checkout Pull Request Code and Install npm
+name: Stagefull deployment
 
 on:
   create:
