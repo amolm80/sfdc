@@ -1,4 +1,4 @@
-name: Checkout Pull Request Code and Install npm
+name: Validate pull request
 
 on:
   pull_request:
