@@ -1,0 +1,81 @@
+name: Testing branch deployment
+
+on:
+  push:
+    branches:
+      - 'Testing-**'
+
+jobs:
+  checkout_and_install:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout pull request code
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v2
+        with:
+          node-version: '20.12.2' # or specify the version you need
+
+      - name: Install npm dependencies and SFDX/SF
+        run: |
+            npm install
+        env:
+          CERTIFICATE_BASE64: ${{ secrets.SALESFORCE_SERVER_KEY }}
+      - name: get jira ticket name
+        run: |
+              # Get the pull request branch name
+              #branch_name=$(echo "${{ github.head_ref }}" | tr '[:upper:]' '[:lower:]')
+              branch_name=$(echo "${{ github.head_ref }}")
+              echo "branch_name: $branch_name" 
+
+              # Extract Jira ticket numbers from the branch name
+              tickets=$(echo "$branch_name" | grep -oE 'SFDX-[0-9]+' | tr '\n' ' ')
+
+              # Print the extracted Jira tickets
+              echo "Jira Tickets: $tickets"
+
+              echo $CERTIFICATE_BASE64 > server.txt
+              cat server.txt
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v2
+        with:
+           node-version: '20.12.2' # or specify the version you need
+
+      - name: Install npm dependencies and SFDX/SF
+        run: |
+             npm install
+             npm install @salesforce/cli --global
+
+      - name: Install SFD
+        run: npm install @salesforce/cli --global
+
+      #- name: Access Repository Secret and create server.key
+      #  run:  |
+       #        echo ${{ secrets.SALESFORCE_SERVER_KEY }} | base64 --decode > server.key
+       #        cat server.key
+         #run:  echo "${{ secrets.SALESFORCE_SERVER_KEY }}" | base64 --decode > server.key
+
+      - name: Authenticated devOrg
+        run: sf org login jwt --client-id ${{ secrets.SALESFORCE_CLIENT_ID }} --jwt-key-file /home/runner/work/sfdc/sfdc/key/devorg/server.key  --username ${{ secrets.SALESFORCE_USERNAME }} --instance-url https://amolm-dev-ed.my.salesforce.com -a devorg
+
+      - name: Validate package
+        run : |
+               cd /home/runner/work/sfdc/sfdc/
+               Test_classes=$(cat manifest/testRun.txt)
+               sf project deploy validate --target-org devorg --manifest manifest/package.xml -l RunSpecifiedTests -t $Test_classes
+
+      - name: Validate deployment 
+        run : |
+               cd /home/runner/work/sfdc/sfdc/
+               Test_classes=$(cat manifest/testRun.txt)
+               sf project deploy validate --target-org devorg --manifest package.xml --pre-destructive-changes manifest/predestructiveChanges.xml --post-destructive-changes manifest/postdestructiveChanges.xml -l RunSpecifiedTests -t $Test_classes
+
+      - name: deploy
+        run : |
+               cd /home/runner/work/sfdc/sfdc/
+               Test_classes=$(cat manifest/testRun.txt)
+               sf project deploy quick --async --use-most-recent --target-org devorg
