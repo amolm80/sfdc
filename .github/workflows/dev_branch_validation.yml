@@ -67,3 +67,9 @@ jobs:
                cd /home/runner/work/sfdc/sfdc/
                Test_classes=$(cat manifest/testRun.txt)
                sf project deploy validate --target-org devorg --manifest manifest/package.xml -l RunSpecifiedTests -t $Test_classes
+
+      - name: Validate deployment 
+        run : |
+               cd /home/runner/work/sfdc/sfdc/
+               Test_classes=$(cat manifest/testRun.txt)
+               sf project deploy validate --target-org devorg --manifest manifest/package.xml --pre-destructive-changes manifest/predestructiveChanges.xml --post-destructive-changes manifest/postdestructiveChanges.xml -l RunSpecifiedTests -t $Test_classes
