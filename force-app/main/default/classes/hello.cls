@@ -1,5 +1,5 @@
 public class hello {
-
+sadf
     public List<test__c> rec {get;set;}	
     
     public void init() {
