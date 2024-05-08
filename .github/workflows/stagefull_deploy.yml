@@ -1,8 +1,4 @@
-<<<<<<<< HEAD:.github/workflows/testing.yml.txt
-name: Validte and deploy Testing Branch
-========
 name: Stagefull deployment
->>>>>>>> SFDX-123-this-is-a-test-branch:.github/workflows/stagefull_deploy.yml
 
 on:
   create:
@@ -14,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout testing branch code 
+      - name: Checkout pull request code
         uses: actions/checkout@v2
         with:
           ref: ${{ github.event.pull_request.head.ref }}
