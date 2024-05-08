@@ -1,0 +1,14 @@
+<template>
+    <lightning-card title="Contact List" icon-name="standard:contact">
+        <div class="slds-m-around_medium">
+            <c-custom-dt-type-lwc
+                key-field="Id"
+                data={data}
+                columns={columns}
+                hide-checkbox-column
+                onrowaction={handleRowAction}
+                onpicklistvaluechange={handlePicklistValueChange}
+            ></c-custom-dt-type-lwc>
+        </div>
+    </lightning-card>
+</template>

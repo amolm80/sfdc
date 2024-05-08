@@ -1,0 +1,13 @@
+<template>
+    This is a test
+    <lightning-card title="Editable Picklist Data Table">
+        <div class="slds-m-around_medium">
+            <lightning-datatable
+                key-field="Id"
+                data={data}
+                columns={columns}
+                oncellchange={handleCellChange}>
+            </lightning-datatable>
+        </div>
+    </lightning-card>
+</template>

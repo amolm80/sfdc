@@ -1,0 +1,15 @@
+<template>
+    <template if:true={isEditMode}>
+        <lightning-combobox
+            class="picklist-dropdown"
+            name={fieldName}
+            label=""
+            value={value}
+            options={picklistOptions}
+            onchange={handleChange}>
+        </lightning-combobox>
+    </template>
+    <template if:false={isEditMode}>
+        {value}
+    </template>
+</template>
