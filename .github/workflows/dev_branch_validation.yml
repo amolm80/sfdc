@@ -62,11 +62,11 @@ jobs:
       - name: Authenticated devOrg
         run: sf org login jwt --client-id ${{ secrets.SALESFORCE_CLIENT_ID }} --jwt-key-file /home/runner/work/sfdc/sfdc/key/devorg/server.key  --username ${{ secrets.SALESFORCE_USERNAME }} --instance-url https://amolm-dev-ed.my.salesforce.com -a devorg
 
-      - name: Validate package
-        run : |
-               cd /home/runner/work/sfdc/sfdc/
-               Test_classes=$(cat manifest/testRun.txt)
-               sf project deploy validate --target-org devorg --manifest manifest/package.xml -l RunSpecifiedTests -t $Test_classes
+      #- name: Validate package
+      #  run : |
+       #        cd /home/runner/work/sfdc/sfdc/
+       #        Test_classes=$(cat manifest/testRun.txt)
+        #       sf project deploy validate --target-org devorg --manifest manifest/package.xml -l RunSpecifiedTests -t $Test_classes
 
       - name: Validate deployment 
         run : |
