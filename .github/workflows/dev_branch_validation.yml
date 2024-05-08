@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  checkout_and_install:
+  Validate_PR:
     runs-on: ubuntu-latest
 
     steps:
