@@ -1,0 +1,32 @@
+name: Validate pull request
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  validate PR 2:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Install npm dependencies and SFDX/SF
+        run: |
+            npm install
+        env:
+          CERTIFICATE_BASE64: ${{ secrets.SALESFORCE_SERVER_KEY }}
+      - name: get jira ticket name
+        run: |
+              # Get the pull request branch name
+              #branch_name=$(echo "${{ github.head_ref }}" | tr '[:upper:]' '[:lower:]')
+              branch_name=$(echo "${{ github.head_ref }}")
+              echo "branch_name: $branch_name" 
+
+              # Extract Jira ticket numbers from the branch name
+              tickets=$(echo "$branch_name" | grep -oE 'SFDX-[0-9]+' | tr '\n' ' ')
+
+              # Print the extracted Jira tickets
+              echo "Jira Tickets: $tickets"
+
+              echo $CERTIFICATE_BASE64 > server.txt
+              cat server.txt
