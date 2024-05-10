@@ -1,3 +1,4 @@
+
 name: Validate pull request
 
 on:
@@ -12,7 +13,9 @@ jobs:
     steps:
       - name: get next saturday 
         run: |
-              next = date -d "next Saturday" "+%Y-%m-%d"
+              next =$(echo date -d "next Saturday" "+%Y-%m-%d")
+              previous = $(echo date -d "last Saturday" "+%Y-%m-%d")
+              date -d "next Saturday" "+%Y-%m-%d"
               previous = date -d "last Saturday" "+%Y-%m-%d"
               if [ -d "/home/runner/work/sfdc/" ]; then
                 echo "Folder exists $next"
