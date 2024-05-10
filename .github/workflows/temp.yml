@@ -18,7 +18,7 @@ jobs:
               date -d "next Saturday" "+%Y-%m-%d"
               previous = date -d "last Saturday" "+%Y-%m-%d"
               if [ -d "/home/runner/work/sfdc/" ]; then
-                echo "Folder exists $next"
+                echo "Folder exists"
               else
                 echo "Folder does not exist $previous"
               fi
