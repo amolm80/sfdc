@@ -12,5 +12,4 @@ jobs:
     steps:
       - name: get next saturday 
         run: |
-              date1="30-AUG-2015"
-              date -d "$date1 next saturday"
+              date -d "next Saturday" "+%Y-%m-%d"
