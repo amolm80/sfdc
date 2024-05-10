@@ -13,8 +13,8 @@ jobs:
     steps:
       - name: get next saturday 
         run: |
-              next =$(echo date -d "next Saturday" "+%Y-%m-%d")
-              previous = $(echo date -d "last Saturday" "+%Y-%m-%d")
+              next = $(date -d "next Saturday" "+%Y-%m-%d")
+              previous = $(date -d "last Saturday" "+%Y-%m-%d")
               date -d "next Saturday" "+%Y-%m-%d"
               previous = date -d "last Saturday" "+%Y-%m-%d"
               if [ -d "/home/runner/work/sfdc/" ]; then
