@@ -12,4 +12,11 @@ jobs:
     steps:
       - name: get next saturday 
         run: |
-              date -d "next Saturday" "+%Y-%m-%d"
+              next = date -d "next Saturday" "+%Y-%m-%d"
+              previous = date -d "last Saturday" "+%Y-%m-%d"
+              if [ -d "/home/runner/work/sfdc/" ]; then
+                echo "Folder exists $next"
+              else
+                echo "Folder does not exist $previous"
+              fi
+
