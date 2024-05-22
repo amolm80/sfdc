@@ -3,6 +3,7 @@ public class helloTest {
 
     @istest
     public static void test() {
+        //added a comment 
         hello h = new hello();
         h.init();       
         List<test__c> list1 = [select id,name from test__c];
