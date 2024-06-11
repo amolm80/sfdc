@@ -1,5 +1,5 @@
 public class hello {
-
+test
     public List<test__c> rec {get;set;}	
     
     public void init() {
