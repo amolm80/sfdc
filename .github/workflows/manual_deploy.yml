@@ -25,9 +25,9 @@ jobs:
       - name: output variables
         run: |
             # Get the pull request branch name
-            branch_name=$(echo ${{ github.event.inputs.branch }}")
-            release_folder=$(echo ${{ github.event.inputs.release_folder }}")
-            echo ${{ github.event.inputs.branch }} 
-            echo ${{ github.event.inputs.release_folder }}
+            branch_name=$(echo "${{ github.event.inputs.branch }}")
+            release_folder=$(echo "${{ github.event.inputs.release_folder }}")
+            echo "${{ github.event.inputs.branch }}" 
+            echo "${{ github.event.inputs.release_folder }}"
             echo "branch_name: $branch_name" 
             echo "release_folder: $release_folder" 
