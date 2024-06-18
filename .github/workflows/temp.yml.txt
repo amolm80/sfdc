@@ -1,0 +1,25 @@
+
+name: Validate pull request
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  validate_PR_2:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: get next saturday 
+        run: |
+              next_saturday=$(date -d "next Saturday" "+%Y-%m-%d")
+              previous_saturday=$(date -d "last Saturday" "+%Y-%m-%d")
+              date -d "next Saturday" "+%Y-%m-%d"
+              date -d "last Saturday" "+%Y-%m-%d"
+              if [ -d "/home/runner/work/sdf/" ]; then
+                echo "Folder exists $next_saturday"
+              else
+                echo "Folder does not exist $previous_saturday"
+              fi
+

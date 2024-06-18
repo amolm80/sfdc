@@ -1,0 +1,32 @@
+name: Manual Deploy
+
+on:
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: 'Branch to deploy'
+        required: true
+        default: 'main'
+      release_folder:
+        description: 'Release folder name'
+        required: true
+        default: 'release'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout pull request code
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.inputs.branch }}
+
+
+          run: |
+              # Get the pull request branch name
+              branch_name=$(echo ${{ github.event.inputs.branch }}")
+              release_folder=$(echo ${{ github.event.inputs.release_folder }}")
+              
+              echo "branch_name: $branch_name" 
+              echo "branch_name: $release_folder" 

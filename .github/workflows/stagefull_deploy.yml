@@ -6,7 +6,7 @@ on:
       - 'Release-**'
 
 jobs:
-  checkout_and_install:
+  Stagefull_deploy:
     runs-on: ubuntu-latest
 
     steps:

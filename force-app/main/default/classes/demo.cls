@@ -1,4 +1,4 @@
-public class hello {
+public class demo   {
 
     public List<test__c> rec {get;set;}	
     
