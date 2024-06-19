@@ -11,14 +11,14 @@ on:
         description: 'Release folder name'
         required: true
         default: 'release'
-    environment:
-        description: 'Environment to deploy to'
-        required: true
-        default: 'dev'
-        options:
-          - dev
-          - staging
-          - prod        
+      environment:
+          description: 'Environment to deploy to'
+          required: true
+          default: 'dev'
+          options:
+            - dev
+            - staging
+            - prod        
 
 jobs:
   deploy:
