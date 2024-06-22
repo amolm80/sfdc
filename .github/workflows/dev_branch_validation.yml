@@ -32,7 +32,7 @@ jobs:
             #else 
             #  exit;
             #fi
-            echo "release name = $release_name"
+            #echo "release name = $release_name"
 
       - name: Setup Node.js environment
         uses: actions/setup-node@v2
