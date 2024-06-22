@@ -44,8 +44,11 @@ jobs:
             previous_saturday=$(date -d "last Saturday" "+%Y-%m-%d")
             date -d "next Saturday" "+%Y-%m-%d"
             date -d "last Saturday" "+%Y-%m-%d"
+            release_name = echo "release-"+$next_saturday
+            previous_saturday=$(date -d "last Saturday" "+%Y-%m-%d")
             if [ -d "/home/runner/work/sdf/" ]; then
               echo "Folder exists $next_saturday"
             else
               echo "Folder does not exist $previous_saturday"
-            fi            
+            fi
+            echo "release name = $release_name"
