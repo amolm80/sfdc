@@ -37,10 +37,10 @@ jobs:
             fi              
             echo "release folder = $release_folder"
 
-      - name: Setup Node.js environment
-        uses: actions/setup-node@v2
-        with:
-          node-version: '20.12.2' # or specify the version you need
+ #     - name: Setup Node.js environment
+ #       uses: actions/setup-node@v2
+ #       with:
+ #         node-version: '20.12.2' # or specify the version you need
 
    #   - name: Install npm dependencies and SFDX/SF
    #     run: |
