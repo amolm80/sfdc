@@ -28,10 +28,14 @@ jobs:
             previous_saturday_folder=$(echo "release-$previous_saturday")
             if [ -d "/home/runner/work/sfdc/sfdc/manifest/$next_saturday_folder" ]; then
               echo "Folder exists $next_saturday_folder"
-            else
+              release_folder=$(echo $next_saturday_folder)
+            else if [ -d "/home/runner/work/sfdc/sfdc/manifest/$previous_saturday_folder" ]; then
               echo "Folder does not exist $previous_saturday_folder"
-            fi
-            echo "release name = $release_name"
+              release_folder=$(echo $previous_saturday_folder)
+            else 
+              exit;
+            fi              
+            echo "release folder = $release_folder"
 
       - name: Setup Node.js environment
         uses: actions/setup-node@v2
