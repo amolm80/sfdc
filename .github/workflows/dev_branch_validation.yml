@@ -21,18 +21,6 @@ jobs:
             previous_saturday=$(date -d "last Saturday" "+%Y-%m-%d")
             date -d "next Saturday" "+%Y-%m-%d"
             date -d "last Saturday" "+%Y-%m-%d"
-            #next_release_name=$(echo "release-$next_saturday")
-            #previous_release_name=$(echo "release-$previous_saturday")
-            #if [ -d "/home/runner/work/sdf/$next_release_name" ]; then
-            #  echo "Next Folder : $next_release_name"
-            #  release_name=$(echo "release-$next_saturday")
-            #else if [ -d "/home/runner/work/sdf/$previous_release_name" ]; then
-            #  echo "Previous Folder : $previous_release_name"
-            #  release_name=$(echo "release-$previous_saturday")
-            #else 
-            #  exit;
-            #fi
-            #echo "release name = $release_name"
 
       - name: Setup Node.js environment
         uses: actions/setup-node@v2
