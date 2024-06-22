@@ -15,31 +15,53 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.ref }}
 
-      - name: Setup Node.js environment
-        uses: actions/setup-node@v2
-        with:
-          node-version: '20.12.2' # or specify the version you need
 
-      - name: Install npm dependencies and SFDX/SF
-        run: |
-            npm install
-        env:
-          CERTIFICATE_BASE64: ${{ secrets.SALESFORCE_SERVER_KEY }}
-      - name: get jira ticket name
-        run: |
+      - name: Get Release folder
+        run : |
+            next_saturday=$(date -d "next Saturday" "+%Y-%m-%d")
+            previous_saturday=$(date -d "last Saturday" "+%Y-%m-%d")
+            #date -d "next Saturday" "+%Y-%m-%d"
+            #date -d "last Saturday" "+%Y-%m-%d"
+            release_name=$(echo "release-$next_saturday")
+            previous_saturday=$(date -d "last Saturday" "+%Y-%m-%d")
+            next_saturday_folder=$(echo "release-$next_saturday")
+            previous_saturday_folder=$(echo "release-$previous_saturday")
+            if [ -d "/home/runner/work/sfdc/sfdc/manifest/$next_saturday_folder" ]; then
+              echo "Folder exists $next_saturday_folder"
+              release_folder=$(echo $next_saturday_folder)
+            elif [ -d "/home/runner/work/sfdc/sfdc/manifest/$previous_saturday_folder" ]; then
+              echo "Folder does not exist $previous_saturday_folder"
+              release_folder=$(echo $previous_saturday_folder)
+            else 
+              exit;
+            fi              
+            echo "release folder = $release_folder"
+
+ #     - name: Setup Node.js environment
+ #       uses: actions/setup-node@v2
+ #       with:
+ #         node-version: '20.12.2' # or specify the version you need
+
+   #   - name: Install npm dependencies and SFDX/SF
+   #     run: |
+   #         npm install
+     #   env:
+     #     CERTIFICATE_BASE64: ${{ secrets.SALESFORCE_SERVER_KEY }}
+      #- name: get jira ticket name
+      #  run: |
               # Get the pull request branch name
               #branch_name=$(echo "${{ github.head_ref }}" | tr '[:upper:]' '[:lower:]')
-              branch_name=$(echo "${{ github.head_ref }}")
-              echo "branch_name: $branch_name" 
+      #        branch_name=$(echo "${{ github.head_ref }}")
+      #        echo "branch_name: $branch_name" 
 
               # Extract Jira ticket numbers from the branch name
-              tickets=$(echo "$branch_name" | grep -oE 'SFDX-[0-9]+' | tr '\n' ' ')
+      #        tickets=$(echo "$branch_name" | grep -oE 'SFDX-[0-9]+' | tr '\n' ' ')
 
               # Print the extracted Jira tickets
-              echo "Jira Tickets: $tickets"
+      #        echo "Jira Tickets: $tickets"
 
-              echo $CERTIFICATE_BASE64 > server.txt
-              cat server.txt
+      #        echo $CERTIFICATE_BASE64 > server.txt
+      #        cat server.txt
       - name: Setup Node.js environment
         uses: actions/setup-node@v2
         with:
@@ -50,8 +72,8 @@ jobs:
              npm install
              npm install @salesforce/cli --global
 
-      - name: Install SFD
-        run: npm install @salesforce/cli --global
+      #- name: Install SFD
+      #  run: npm install @salesforce/cli --global
 
       #- name: Access Repository Secret and create server.key
       #  run:  |
@@ -72,4 +94,4 @@ jobs:
         run : |
                cd /home/runner/work/sfdc/sfdc/
                Test_classes=$(cat manifest/testRun.txt)
-               sf project deploy validate --target-org devorg --manifest manifest/package.xml --pre-destructive-changes manifest/predestructiveChanges.xml --post-destructive-changes manifest/postdestructiveChanges.xml -l RunSpecifiedTests -t $Test_classes
+               sf project deploy validate --target-org devorg --manifest manifest/$release_folder/package.xml --pre-destructive-changes manifest/$release_folder/predestructiveChanges.xml --post-destructive-changes manifest/$release_folder/postdestructiveChanges.xml -l RunSpecifiedTests -t $Test_classes
