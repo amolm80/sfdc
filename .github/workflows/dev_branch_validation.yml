@@ -15,6 +15,25 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.ref }}
 
+      - name: Get Release name 
+        run: | 
+            next_saturday=$(date -d "next Saturday" "+%Y-%m-%d")
+            previous_saturday=$(date -d "last Saturday" "+%Y-%m-%d")
+            date -d "next Saturday" "+%Y-%m-%d"
+            date -d "last Saturday" "+%Y-%m-%d"
+            release_name=$(echo "release-$next_saturday")
+            previous_saturday=$(date -d "last Saturday" "+%Y-%m-%d")
+            if [ -d "/home/runner/work/sdf/"$next_saturday ]; then
+              echo "Next Folder : $next_saturday"
+              release_name=$(echo "release-$next_saturday")
+            else if [ -d "/home/runner/work/sdf/"$previous_saturday ]; then
+              echo "Previous Folder : $previous_saturday"
+              release_name=$(echo "release-$previous_saturday")
+            else 
+              exit;
+            fi
+            echo "release name = $release_name"
+
       - name: Setup Node.js environment
         uses: actions/setup-node@v2
         with:
