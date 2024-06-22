@@ -1,4 +1,4 @@
-t_name: Validate pull request
+name: Validate pull request
 
 on:
   pull_request:
@@ -15,12 +15,21 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.ref }}
 
-      - name: Get Release name 
-        run: | 
+
+      - name: Setup Node.js environment
+        run : |
             next_saturday=$(date -d "next Saturday" "+%Y-%m-%d")
             previous_saturday=$(date -d "last Saturday" "+%Y-%m-%d")
             date -d "next Saturday" "+%Y-%m-%d"
             date -d "last Saturday" "+%Y-%m-%d"
+            release_name=$(echo "release-$next_saturday")
+            previous_saturday=$(date -d "last Saturday" "+%Y-%m-%d")
+            if [ -d "/home/runner/work/sdf/" ]; then
+              echo "Folder exists $next_saturday"
+            else
+              echo "Folder does not exist $previous_saturday"
+            fi
+            echo "release name = $release_name"
 
       - name: Setup Node.js environment
         uses: actions/setup-node@v2
