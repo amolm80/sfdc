@@ -42,26 +42,26 @@ jobs:
         with:
           node-version: '20.12.2' # or specify the version you need
 
-      - name: Install npm dependencies and SFDX/SF
-        run: |
-            npm install
-        env:
-          CERTIFICATE_BASE64: ${{ secrets.SALESFORCE_SERVER_KEY }}
-      - name: get jira ticket name
-        run: |
+   #   - name: Install npm dependencies and SFDX/SF
+   #     run: |
+   #         npm install
+     #   env:
+     #     CERTIFICATE_BASE64: ${{ secrets.SALESFORCE_SERVER_KEY }}
+      #- name: get jira ticket name
+      #  run: |
               # Get the pull request branch name
               #branch_name=$(echo "${{ github.head_ref }}" | tr '[:upper:]' '[:lower:]')
-              branch_name=$(echo "${{ github.head_ref }}")
-              echo "branch_name: $branch_name" 
+      #        branch_name=$(echo "${{ github.head_ref }}")
+      #        echo "branch_name: $branch_name" 
 
               # Extract Jira ticket numbers from the branch name
-              tickets=$(echo "$branch_name" | grep -oE 'SFDX-[0-9]+' | tr '\n' ' ')
+      #        tickets=$(echo "$branch_name" | grep -oE 'SFDX-[0-9]+' | tr '\n' ' ')
 
               # Print the extracted Jira tickets
-              echo "Jira Tickets: $tickets"
+      #        echo "Jira Tickets: $tickets"
 
-              echo $CERTIFICATE_BASE64 > server.txt
-              cat server.txt
+      #        echo $CERTIFICATE_BASE64 > server.txt
+      #        cat server.txt
       - name: Setup Node.js environment
         uses: actions/setup-node@v2
         with:
@@ -72,8 +72,8 @@ jobs:
              npm install
              npm install @salesforce/cli --global
 
-      - name: Install SFD
-        run: npm install @salesforce/cli --global
+      #- name: Install SFD
+      #  run: npm install @salesforce/cli --global
 
       #- name: Access Repository Secret and create server.key
       #  run:  |
